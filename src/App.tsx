@@ -1,50 +1,74 @@
+import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import PackageCard from './components/PackageCard';
 import DestinationCard from './components/DestinationCard';
 import ServiceCard from './components/ServiceCard';
 import TestimonialCard from './components/TestimonialCard';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
-import { tourPackages } from './data/packages';
+import TourPackagesWebsite from './components/TourPackagesWebsite';
 import { destinations } from './data/destinations';
 import { services } from './data/services';
 import { testimonials } from './data/testimonials';
 import { Award, Users, Globe, ThumbsUp, MapPin, Phone, Mail } from 'lucide-react';
 
+// Define TourPackage interface to match the one in TourPackagesWebsite
+interface TourPackage {
+  id: number;
+  title: string;
+  destination: string;
+  duration: string;
+  price: number | null;
+  image: string;
+  featured: boolean;
+  description: string;
+  activities: string[];
+  themes: string[];
+  mealPlan: string;
+  inclusions: string[];
+  itinerary: {
+    day: number;
+    title: string;
+    description: string;
+  }[];
+}
+
 function App() {
-  const featuredPackages = tourPackages.filter(pkg => pkg.featured);
+  const [selectedPackage, setSelectedPackage] = useState<TourPackage | null>(null);
+
+  const handlePackageSelect = (pkg: TourPackage) => {
+    setSelectedPackage(pkg);
+    // You can add additional logic here when a package is selected
+    console.log('Package selected:', pkg);
+    
+    // Example: Scroll to contact section when package is selected
+    // const contactSection = document.getElementById('contact');
+    // if (contactSection) {
+    //   contactSection.scrollIntoView({ behavior: 'smooth' });
+    // }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       <Hero />
 
+      {/* TourPackagesWebsite Section */}
       <section id="packages" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Featured <span className="text-emerald-700">Tour Packages</span>
+              Our <span className="text-emerald-700">Tour Packages</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Explore our carefully curated tour packages designed to give you the best travel experience across India
+              Discover amazing destinations with our carefully curated tour packages
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPackages.map((pkg) => (
-              <PackageCard key={pkg.id} package={pkg} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-3 rounded-full hover:from-emerald-700 hover:to-teal-700 transition font-medium">
-              View All Packages
-            </button>
-          </div>
+          <TourPackagesWebsite onPackageSelect={handlePackageSelect} />
         </div>
       </section>
 
+      {/* Destinations Section */}
       <section id="destinations" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -64,6 +88,7 @@ function App() {
         </div>
       </section>
 
+      {/* Stats Section */}
       <section className="py-16 bg-gradient-to-r from-emerald-700 to-teal-600 text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -91,6 +116,7 @@ function App() {
         </div>
       </section>
 
+      {/* Services Section */}
       <section id="services" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -110,6 +136,7 @@ function App() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -129,12 +156,13 @@ function App() {
         </div>
       </section>
 
+      {/* About Section */}
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://images.pexels.com/photos-3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="About Us"
                 className="rounded-2xl shadow-2xl"
               />
@@ -180,6 +208,7 @@ function App() {
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" className="py-16 bg-gradient-to-br from-gray-50 to-emerald-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -194,7 +223,7 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 bg-white rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Send Us an Inquiry</h3>
-              <ContactForm />
+              <ContactForm selectedPackage={selectedPackage} />
             </div>
 
             <div className="space-y-6">
