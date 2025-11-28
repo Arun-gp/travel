@@ -1,6 +1,12 @@
 import { Service } from '../types';
 
-export const services: Service[] = [
+// Extend the Service interface locally
+interface ExtendedService extends Service {
+  fullDescription?: string;
+  bookingUrl?: string;
+}
+
+export const services: ExtendedService[] = [
   {
     id: '1',
     title: 'Tour Packages',
@@ -20,7 +26,9 @@ export const services: Service[] = [
     title: 'Flight Booking',
     description: 'Hassle-free domestic and international flight bookings at competitive prices with instant confirmation.',
     image: 'https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=600',
-    icon: 'plane'
+    icon: 'plane',
+    fullDescription: 'Experience seamless flight booking with our comprehensive service. We offer competitive prices on domestic and international flights, instant confirmation, and 24/7 customer support.',
+    bookingUrl: 'https://www.skyscanner.co.in/'
   },
   {
     id: '4',
