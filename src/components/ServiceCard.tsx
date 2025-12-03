@@ -84,10 +84,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                 {(service as any).fullDescription || service.description}
               </p>
 
+              {/* Flight Booking Benefits */}
               {service.id === '3' && (
                 <div className="bg-teal-50 rounded-lg p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
-                    Why Book With Us?
+                    Why Book Flights With Us?
                   </h3>
                   <ul className="space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                     <li className="flex items-start gap-2">
@@ -110,6 +111,87 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                 </div>
               )}
 
+              {/* Hotel Booking Benefits */}
+              {service.id === '2' && (
+                <div className="bg-teal-50 rounded-lg p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                    Why Choose Our Hotel Booking Service?
+                  </h3>
+                  <ul className="space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Wide selection from budget to luxury properties</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Best price guarantee and exclusive deals</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Verified guest reviews and ratings</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Free cancellation on most bookings</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+
+              {/* Car & Coach Rental Benefits */}
+              {service.id === '5' && (
+                <div className="bg-teal-50 rounded-lg p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                    Why Rent With Us?
+                  </h3>
+                  <ul className="space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Wide range of vehicles from compact to luxury coaches</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Experienced and professional drivers</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Well-maintained and clean vehicles</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Flexible booking options and competitive rates</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+
+              {/* Railway Tickets Benefits */}
+              {service.id === '4' && (
+                <div className="bg-teal-50 rounded-lg p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                    Why Book Train Tickets With Us?
+                  </h3>
+                  <ul className="space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Easy booking with instant confirmation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Real-time PNR status and train schedule updates</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>Multiple payment options for your convenience</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-teal-600 mt-1">✓</span>
+                      <span>24/7 customer support for booking assistance</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={handleClose}
@@ -124,7 +206,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
                     rel="noopener noreferrer"
                     className="w-full sm:flex-1 bg-teal-600 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-teal-700 transition font-medium text-center text-sm sm:text-base"
                   >
-                    Book Flight Ticket
+                    {service.id === '2' ? 'Book Hotel' : 
+                     service.id === '3' ? 'Book Flight Ticket' : 
+                     service.id === '4' ? 'Book Train Ticket' :
+                     service.id === '5' ? 'Book Car Rental' : 'Book Now'}
                   </a>
                 )}
               </div>
